@@ -16,27 +16,27 @@ const CannabisMarketSimulator = () => {
     setTotalMarketValue(medicalValue + hempValue + adultUseValue);
   }, [medicalValue, hempValue, adultUseValue]);
 
-  const calculateRevenue = (percentage: number) => {
-    return (totalMarketValue * percentage / 100).toFixed(2);
+  const calculateRevenue = (percentage: number, baseValue: number) => {
+    return (baseValue * percentage / 100).toFixed(2);
   };
 
   const segmentedTaxes = [
     { category: "Impuesto Específico al Consumo", segments: [
-      { name: "Uso Medicinal o Terapéutico", percentage: 10 },
-      { name: "Cosméticos", percentage: 5 },
-      { name: "Alimenticio", percentage: 5 },
-      { name: "Veterinario", percentage: 3 },
-      { name: "Uso Adulto", percentage: 4 },
+      { name: "Uso Medicinal o Terapéutico", percentage: 10, type: "medical" },
+      { name: "Cosméticos", percentage: 5, type: "hemp" },
+      { name: "Alimenticio", percentage: 5, type: "hemp" },
+      { name: "Veterinario", percentage: 3, type: "hemp" },
+      { name: "Uso Adulto", percentage: 4, type: "adultUse" },
     ]},
     { category: "Licencias", segments: [
-      { name: "Producción", percentage: 2 },
-      { name: "Industrialización", percentage: 2 },
-      { name: "Comercio", percentage: 1 },
+      { name: "Producción", percentage: 2, type: "all" },
+      { name: "Industrialización", percentage: 2, type: "all" },
+      { name: "Comercio", percentage: 1, type: "all" },
     ]},
     { category: "Impuesto sobre la Renta", segments: [
-      { name: "Empresas Productoras", percentage: 10 },
-      { name: "Empresas Industrializadoras", percentage: 10 },
-      { name: "Comercios", percentage: 7 },
+      { name: "Empresas Productoras", percentage: 10, type: "all" },
+      { name: "Empresas Industrializadoras", percentage: 10, type: "all" },
+      { name: "Comercios", percentage: 7, type: "all" },
     ]},
   ];
 
@@ -47,6 +47,24 @@ const CannabisMarketSimulator = () => {
     { name: "Instituto Dominicano del Cannabis (INDOCANNABIS)", percentage: 15, description: "Para fortalecer sus capacidades y asegurar el cumplimiento normativo" },
     { name: "Otros destinos", percentage: 65, description: "Destino no especificado en el Artículo 42" },
   ];
+
+  const getBaseValueForSegment = (type: string) => {
+    switch (type) {
+      case "medical": return medicalValue;
+      case "hemp": return hempValue;
+      case "adultUse": return adultUseValue;
+      case "all": return totalMarketValue;
+      default: return 0;
+    }
+  };
+
+  const getTotalRevenue = () => {
+    return segmentedTaxes.reduce((acc, category) => 
+      acc + category.segments.reduce((sum, segment) => 
+        sum + Number(calculateRevenue(segment.percentage, getBaseValueForSegment(segment.type))), 0
+      ), 0
+    ).toFixed(2);
+  };
 
   return (
     <div className="space-y-6">
@@ -116,7 +134,7 @@ const CannabisMarketSimulator = () => {
                       )}
                       <TableCell>{segment.name}</TableCell>
                       <TableCell>{segment.percentage}%</TableCell>
-                      <TableCell>{calculateRevenue(segment.percentage)}</TableCell>
+                      <TableCell>{calculateRevenue(segment.percentage, getBaseValueForSegment(segment.type))}</TableCell>
                     </TableRow>
                   ))}
                 </React.Fragment>
@@ -128,11 +146,7 @@ const CannabisMarketSimulator = () => {
                     acc + category.segments.reduce((sum, segment) => sum + segment.percentage, 0)
                   , 0)}%
                 </TableCell>
-                <TableCell>
-                  {calculateRevenue(segmentedTaxes.reduce((acc, category) => 
-                    acc + category.segments.reduce((sum, segment) => sum + segment.percentage, 0)
-                  , 0))}
-                </TableCell>
+                <TableCell>{getTotalRevenue()}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -158,7 +172,7 @@ const CannabisMarketSimulator = () => {
                 <TableRow key={index}>
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.percentage}%</TableCell>
-                  <TableCell>{(Number(calculateRevenue(59)) * item.percentage / 100).toFixed(2)}</TableCell>
+                  <TableCell>{(Number(getTotalRevenue()) * item.percentage / 100).toFixed(2)}</TableCell>
                   <TableCell>{item.description}</TableCell>
                 </TableRow>
               ))}
