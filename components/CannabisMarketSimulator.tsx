@@ -99,10 +99,36 @@ const CannabisMarketSimulator = () => {
     { name: "Otros destinos", percentage: 65, description: "Destino no especificado en el Artículo 42" },
   ];
 
-  const stateSavings = [
-    { entity: "Salud Pública", savings: 50, description: "Ahorros asignados para el sistema de salud." },
-    { entity: "Educación", savings: 30, description: "Fondos destinados a mejorar la infraestructura educativa." },
-    { entity: "Desarrollo Social", savings: 20, description: "Inversiones en programas de bienestar social." },
+  const distributionTable = [
+    { institution: "Ministerio Público", percentage: 25, amount: 97789016.96 },
+    { institution: "Consejo Nacional de Drogas (CND)", percentage: 25, amount: 97789016.96 },
+    { institution: "Dirección Nacional de Control de Drogas (DNCD)", percentage: 25, amount: 97789016.96 },
+    { institution: "Policía Nacional", percentage: 10, amount: 39115606.78 },
+    { institution: "ONGs dedicadas a la prevención del consumo de drogas (primer grupo)", percentage: 15, amount: 58673410.18, organizations: [
+      "Hogar Crea Internacional",
+      "Comunidad Hermanos Unidos en Cristo",
+      "Hogar Crea Dominicano Inc.",
+      "Asociación Guarabird Inc",
+      "Fundación Desafío Juvenil Internacional",
+      "El Mesón de Dios Ministerio de Rehabilitación de Adictos",
+      "Ministerio en Cristo Se Puede Filipenses 4:13",
+      "Fundación Centro de Solidaridad Santo Domingo Proyecto Hombre",
+      "Fundación Volver Voluntarios Verdaderos",
+      "Asociación Casa Abierta"
+    ] },
+    { institution: "ONGs dedicadas a la prevención del consumo de drogas (segundo grupo)", percentage: 15, amount: 58673410.18, organizations: [
+      "Centro de Restauración Gavaón",
+      "Casa del Alfarero",
+      "Nuevo Renacer Inc.",
+      "Ministerio Evangelístico Carcelario Rescatando Adictos para Cristo Inc.",
+      "Misión Yeshua-Trayer Temple Church Fundación",
+      "Ministerio Evangelístico Juan 3:16",
+      "Fundación Casa de la Restauración Dios es Fiel",
+      "Fundación Ciudades de Refugio",
+      "Ministerio Evangelístico Rescatado del Lodo",
+      "Fundación Fenix Volver a Vivir",
+      "Asociación contra las Adicciones (ASCAYD)"
+    ] }
   ];
 
   const PIBDominicana = 11200 // en millones
@@ -227,12 +253,49 @@ const CannabisMarketSimulator = () => {
                 <TableCell>
                   {calculateTotalRevenueDistribution()} millones de US$
                 </TableCell>
-                <TableCell colSpan={1}></TableCell>
+                <TableCell colSpan={1}>{(calculateTotalRevenueDistribution() as any * 59).toFixed(2)} millones de RD$</TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </CardContent>
       </Card>
+
+      <Card>
+      <CardHeader>
+        <CardTitle>Distribución de Fondos Procuraduria 2023 <span style={{ fontSize: 12 }}>(<a href='https://dncd.gob.do/index.php/noticias1/noticias/item/1795-procuraduria-entrega-391-millones-a-instituciones-que-luchan-contra-las-drogas' target='_blank'>Link</a>)</span></CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Institución/ONG</TableHead>
+              <TableHead>Porcentaje Asignado</TableHead>
+              <TableHead>Monto Asignado (RD$)</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {distributionTable.map((item, index) => (
+              <React.Fragment key={index}>
+                <TableRow>
+                  <TableCell>{item.institution}</TableCell>
+                  <TableCell>{item.percentage}%</TableCell>
+                  <TableCell>{item.amount.toLocaleString()}</TableCell>
+                </TableRow>
+                {item.organizations && item.organizations.map((org, orgIndex) => (
+                  <TableRow key={orgIndex} style={{ backgroundColor: '#bdbdbd1c', fontSize: 12}}>
+                    <TableCell style={{ paddingLeft: '20px' }}>{org}</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                ))}
+              </React.Fragment>
+            ))}
+          </TableBody>
+        </Table>
+        <br />
+        <p>Total distribuido: RD$391,156,067.85</p>
+      </CardContent>
+    </Card>
 
       <div className="text-sm text-muted-foreground">
         <p>Nota: Los porcentajes son estimados basados en la ley propuesta y pueden variar según la implementación final.</p>
