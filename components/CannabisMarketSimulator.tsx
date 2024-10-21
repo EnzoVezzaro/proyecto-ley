@@ -93,8 +93,8 @@ const CannabisMarketSimulator = () => {
 
   const taxDistribution = [
     { name: "Ministerio de Economía, Planificación y Desarrollo", percentage: 5, description: "Para atender el inciso c) del artículo 2" },
-    { name: "Ministerio de Salud", percentage: 10, description: "Para atender los incisos a) y e) del artículo 2" },
-    { name: "Ministerio de Salud", percentage: 5, description: "Para atender el inciso f) del artículo 2" },
+    { name: "Ministerio de Salud: Uso Medicinal", percentage: 10, description: "Para atender los incisos a) y e) del artículo 2" },
+    { name: "Ministerio de Salud: Red integral de Asistencia ", percentage: 5, description: "Para atender el inciso f) del artículo 2" },
     { name: "Instituto Dominicano del Cannabis (INDOCANNABIS)", percentage: 15, description: "Para fortalecer sus capacidades y asegurar el cumplimiento normativo" },
     { name: "Otros destinos", percentage: 65, description: "Destino no especificado en el Artículo 42" },
   ];
