@@ -5,7 +5,7 @@ const CannabisMarketSimulator = dynamic(() => import('@/components/CannabisMarke
 export default function Home() {
   return (
     <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6 text-center">Simulador de Mercado de Cannabis en República Dominicana</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">LEY PARA LA REGULACIÓN Y CONTROL DEL CANNABIS: <br />NUEVOS MERCADOS PARA EL DESARROLLO</h1>
       <CannabisMarketSimulator />
     </main>
   );
