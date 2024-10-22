@@ -319,16 +319,12 @@ const CannabisMarketSimulator = () => {
     { delito: 'Total', total: 165461, porcentaje: 100.00 }
   ];
 
-  const employmentFactors = {
-    medical: 10, // Ejemplos: 10 empleos por millón en Cannabis Medicinal
-    hemp: 5,     // Ejemplos: 5 empleos por millón en Cáñamo Industrial
-    adultUse: 8, // Ejemplos: 8 empleos por millón en Uso Adulto
-  };
+  const employmentFactor = 150_000; // 1 employee per 150,000 US$
 
   const calculateEmployment = () => {
-    const medicalEmployment = medicalValue * employmentFactors.medical;
-    const hempEmployment = hempValue * employmentFactors.hemp;
-    const adultUseEmployment = adultUseValue * employmentFactors.adultUse;
+    const medicalEmployment = Math.floor(medicalValue * 1_000_000 / employmentFactor);
+    const hempEmployment = Math.floor(hempValue * 1_000_000 / employmentFactor);
+    const adultUseEmployment = Math.floor(adultUseValue * 1_000_000 / employmentFactor);
   
     return medicalEmployment + hempEmployment + adultUseEmployment;
   };
@@ -411,72 +407,72 @@ const CannabisMarketSimulator = () => {
           <CardTitle>Impacto en el Mercado de Trabajo</CardTitle>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Desglose por Industria</TableHead>
-                <TableHead>Empleados Generados</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {/* Desglose por Industria */}
-              <TableRow>
-                <TableCell>Medicina</TableCell>
-                <TableCell>
-                  {Math.floor(medicalValue * employmentFactors.medical)} empleos
-                </TableCell>
-              </TableRow>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Desglose por Industria</TableHead>
+              <TableHead>Empleados Generados</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {/* Desglose por Industria */}
+            <TableRow>
+              <TableCell>Medicina</TableCell>
+              <TableCell>
+                {Math.floor(medicalValue * 1_000_000 / employmentFactor)} empleos
+              </TableCell>
+            </TableRow>
 
-              <TableRow className="text-sm bg-gray-100">
-                <TableCell>Empleados</TableCell>
-                <TableCell>{Math.floor(medicalValue * employmentFactors.medical * 0.8)}</TableCell>
-              </TableRow>
-              <TableRow className="text-sm bg-gray-100">
-                <TableCell>Empresas</TableCell>
-                <TableCell>{Math.floor(medicalValue * employmentFactors.medical * 0.2)}</TableCell>
-              </TableRow>
+            <TableRow className="text-sm bg-gray-100">
+              <TableCell>Empleados</TableCell>
+              <TableCell>{Math.floor(medicalValue * 1_000_000 / employmentFactor)}</TableCell>
+            </TableRow>
+            <TableRow className="text-sm bg-gray-100">
+              <TableCell>Empresas</TableCell>
+              <TableCell>{Math.floor((medicalValue * 1_000_000 / employmentFactor) / 5)}</TableCell>
+            </TableRow>
 
-              <TableRow>
-                <TableCell>Industria del Cáñamo</TableCell>
-                <TableCell>
-                  {Math.floor(hempValue * employmentFactors.hemp)} empleos
-                </TableCell>
-              </TableRow>
+            <TableRow>
+              <TableCell>Industria del Cáñamo</TableCell>
+              <TableCell>
+                {Math.floor(hempValue * 1_000_000 / employmentFactor)} empleos
+              </TableCell>
+            </TableRow>
 
-              <TableRow className="text-sm bg-gray-100">
-                <TableCell>Empleados</TableCell>
-                <TableCell>{Math.floor(hempValue * employmentFactors.hemp * 0.8)}</TableCell>
-              </TableRow>
-              <TableRow className="text-sm bg-gray-100">
-                <TableCell>Empresas</TableCell>
-                <TableCell>{Math.floor(hempValue * employmentFactors.hemp * 0.2)}</TableCell>
-              </TableRow>
+            <TableRow className="text-sm bg-gray-100">
+              <TableCell>Empleados</TableCell>
+              <TableCell>{Math.floor(hempValue * 1_000_000 / employmentFactor)}</TableCell>
+            </TableRow>
+            <TableRow className="text-sm bg-gray-100">
+              <TableCell>Empresas</TableCell>
+              <TableCell>{Math.floor((hempValue * 1_000_000 / employmentFactor) / 5)}</TableCell>
+            </TableRow>
 
-              <TableRow>
-                <TableCell>Uso Adulto</TableCell>
-                <TableCell>
-                  {Math.floor(adultUseValue * employmentFactors.adultUse)} empleos
-                </TableCell>
-              </TableRow>
+            <TableRow>
+              <TableCell>Uso Adulto</TableCell>
+              <TableCell>
+                {Math.floor(adultUseValue * 1_000_000 / employmentFactor)} empleos
+              </TableCell>
+            </TableRow>
 
-              <TableRow className="text-sm bg-gray-100">
-                <TableCell>Empleados</TableCell>
-                <TableCell>{Math.floor(adultUseValue * employmentFactors.adultUse * 0.8)}</TableCell>
-              </TableRow>
-              <TableRow className="text-sm bg-gray-100">
-                <TableCell>Empresas</TableCell>
-                <TableCell>{Math.floor(adultUseValue * employmentFactors.adultUse * 0.2)}</TableCell>
-              </TableRow>
+            <TableRow className="text-sm bg-gray-100">
+              <TableCell>Empleados</TableCell>
+              <TableCell>{Math.floor(adultUseValue * 1_000_000 / employmentFactor)}</TableCell>
+            </TableRow>
+            <TableRow className="text-sm bg-gray-100">
+              <TableCell>Empresas</TableCell>
+              <TableCell>{Math.floor((adultUseValue * 1_000_000 / employmentFactor) / 5)}</TableCell>
+            </TableRow>
 
-              <TableRow className="font-bold">
-                <TableCell>Total Empleados Generados</TableCell>
-                <TableCell>
-                  {`${calculateEmployment()} empleos`}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </CardContent>
+            <TableRow className="font-bold">
+              <TableCell>Total Empleados Generados</TableCell>
+              <TableCell>
+                {calculateEmployment()} empleos
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </CardContent>
         <div className="m-4 mt-0 text-sm text-muted-foreground">
           <p>
             Nota: Debido a la falta de información verificable en el país, hemos utilizado las mejores prácticas internacionales para realizar estos cálculos. 
