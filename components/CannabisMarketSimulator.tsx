@@ -105,7 +105,7 @@ const CannabisMarketSimulator = () => {
     return (baseValue * percentage / 100).toFixed(2);
   };
 
-  const calculateLicenseRevenue = (fee, multiplier) => {
+  const calculateLicenseRevenue = (fee: any, multiplier: any) => {
     return ((fee * multiplier) / 1000000).toFixed(2); // Convert to millions
   };
 
@@ -161,8 +161,8 @@ const CannabisMarketSimulator = () => {
     }, 0);
   };
 
-  const getTotalRevenueForCategory = (category) => {
-    return category.segments.reduce((sum, segment) => {
+  const getTotalRevenueForCategory = (category: any) => {
+    return category.segments.reduce((sum: any, segment: any) => {
       if (segment.isLicenseFee) {
         return sum + Number(calculateLicenseRevenue(segment.fee, segment.multiplier));
       }
@@ -170,8 +170,8 @@ const CannabisMarketSimulator = () => {
     }, 0).toFixed(2);
   };
 
-  const getTotalPercentageForCategory = (category) => {
-    return category.segments.reduce((sum, segment) => 
+  const getTotalPercentageForCategory = (category: any) => {
+    return category.segments.reduce((sum: any, segment: any) => 
       segment.isLicenseFee ? sum : sum + segment.percentage, 0
     );
   };
@@ -564,7 +564,7 @@ const CannabisMarketSimulator = () => {
       </Card>
 
       <div className="text-sm text-muted-foreground">
-        <p>Nota: Los porcentajes son estimados basados en la propuesta de ley "LEY PARA LA REGULACIÓN Y CONTROL DEL CANNABIS: NUEVOS MERCADOS PARA EL DESARROLLO" y pueden variar según la implementación final. El impuesto específico al consumo de productos con cannabis es del 27% según el Artículo 36 de la ley propuesta. La distribución de los impuestos recaudados se basa en el Artículo 42 de la ley propuesta.</p>
+        <p>Nota: Los porcentajes son estimados basados en la propuesta de ley &quot;LEY PARA LA REGULACIÓN Y CONTROL DEL CANNABIS: NUEVOS MERCADOS PARA EL DESARROLLO&quot; y pueden variar según la implementación final. El impuesto específico al consumo de productos con cannabis es del 27% según el Artículo 36 de la ley propuesta. La distribución de los impuestos recaudados se basa en el Artículo 42 de la ley propuesta.</p>
       </div>
 
       <Card>
