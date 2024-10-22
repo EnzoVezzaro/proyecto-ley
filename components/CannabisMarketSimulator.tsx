@@ -41,6 +41,61 @@ const CannabisMarketSimulator = () => {
   const [adultUseProductionMultiplier, setAdultUseProductionMultiplier] = useState(1000);
   const [adultUseCommerceMultiplier, setAdultUseCommerceMultiplier] = useState(1000);
 
+  const similarMarketsData = [
+    { country: "Colombia", marketValue: 500, medicinal: true, industrial: true, adultUse: false, description: "Mercado en crecimiento con enfoque en cannabis medicinal." },
+    { country: "Canadá", marketValue: 800, medicinal: true, industrial: true, adultUse: true, description: "Mercado maduro con regulación completa para uso adulto." },
+    { country: "Uruguay", marketValue: 200, medicinal: true, industrial: true, adultUse: true, description: "Pionero en la legalización de cannabis." },
+    { country: "Estados Unidos", marketValue: 1000, medicinal: true, industrial: true, adultUse: true, description: "Mercado grande y diverso en varios estados." },
+    { country: "México", marketValue: 300, medicinal: true, industrial: true, adultUse: false, description: "Mercado en desarrollo con leyes en proceso." },
+    { country: "Alemania", marketValue: 600, medicinal: true, industrial: true, adultUse: true, description: "Mercado establecido para cannabis medicinal." },
+    { country: "Australia", marketValue: 400, medicinal: true, industrial: true, adultUse: false, description: "Regulación en cannabis medicinal y industrial." },
+    { country: "Nueva Zelanda", marketValue: 350, medicinal: true, industrial: false, adultUse: false, description: "Cannabis medicinal regulado desde 2018." },
+    { country: "Sudáfrica", marketValue: 250, medicinal: true, industrial: true, adultUse: true, description: "Regulaciones en cannabis medicinal y uso recreativo." },
+    { country: "Portugal", marketValue: 180, medicinal: true, industrial: false, adultUse: false, description: "Regulación del cannabis medicinal." },
+    { country: "Italia", marketValue: 280, medicinal: true, industrial: true, adultUse: false, description: "Mercado para cannabis medicinal y productos derivados." },
+    { country: "Chile", marketValue: 220, medicinal: true, industrial: false, adultUse: false, description: "Regulación de cannabis medicinal." },
+    { country: "Islas Malvinas", marketValue: 100, medicinal: true, industrial: false, adultUse: false, description: "Regulación limitada al uso medicinal." },
+    { country: "Costa Rica", marketValue: 150, medicinal: true, industrial: false, adultUse: false, description: "Mercado en desarrollo con enfoque en cannabis medicinal." },
+    { country: "Bélgica", marketValue: 170, medicinal: true, industrial: false, adultUse: false, description: "Regulación de cannabis medicinal." },
+    { country: "Suiza", marketValue: 190, medicinal: true, industrial: true, adultUse: true, description: "Regulaciones para uso recreativo en ciertas condiciones." },
+    { country: "Luxemburgo", marketValue: 120, medicinal: true, industrial: false, adultUse: true, description: "Primer país europeo en legalizar el uso recreativo." },
+    { country: "Catar", marketValue: 70, medicinal: true, industrial: false, adultUse: false, description: "Regulación limitada al uso medicinal." },
+    { country: "Israel", marketValue: 450, medicinal: true, industrial: true, adultUse: false, description: "Líder en investigación y uso medicinal del cannabis." },
+    { country: "Malasia", marketValue: 90, medicinal: false, industrial: false, adultUse: false, description: "Las leyes son estrictas, pero se están considerando cambios." },
+    { country: "Tailandia", marketValue: 130, medicinal: true, industrial: true, adultUse: false, description: "Primer país del sudeste asiático en legalizar el cannabis medicinal." },
+    { country: "Panamá", marketValue: 110, medicinal: true, industrial: false, adultUse: false, description: "Regulación en cannabis medicinal en desarrollo." },
+    { country: "Cleveland (EE.UU.)", marketValue: 40, medicinal: true, industrial: true, adultUse: true, description: "Estado que ha legalizado tanto el uso medicinal como el recreativo." },
+    { country: "Virginia (EE.UU.)", marketValue: 60, medicinal: true, industrial: false, adultUse: true, description: "Legalización reciente del uso recreativo." },
+    { country: "Mónaco", marketValue: 30, medicinal: false, industrial: false, adultUse: false, description: "Sin regulación actual." },
+    { country: "Noruega", marketValue: 180, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal regulado en desarrollo." },
+    { country: "Reino Unido", marketValue: 200, medicinal: true, industrial: true, adultUse: false, description: "Regulación del cannabis medicinal, pero uso recreativo prohibido." },
+    { country: "Japón", marketValue: 80, medicinal: false, industrial: false, adultUse: false, description: "Regulaciones estrictas y prohibiciones." },
+    { country: "República Checa", marketValue: 150, medicinal: true, industrial: true, adultUse: false, description: "Mercado de cannabis medicinal establecido." },
+    { country: "Eslovenia", marketValue: 90, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal regulado desde 2013." },
+    { country: "Ecuador", marketValue: 120, medicinal: true, industrial: false, adultUse: false, description: "Regulación en cannabis medicinal en desarrollo." },
+    { country: "Honduras", marketValue: 100, medicinal: true, industrial: false, adultUse: false, description: "Leyes en proceso para cannabis medicinal." },
+    { country: "Argentina", marketValue: 250, medicinal: true, industrial: false, adultUse: false, description: "Regulación del cannabis medicinal." },
+    { country: "Brasil", marketValue: 300, medicinal: true, industrial: false, adultUse: false, description: "Cannabis medicinal aprobado, pero con restricciones." },
+    { country: "Perú", marketValue: 160, medicinal: true, industrial: false, adultUse: false, description: "Regulación de cannabis medicinal en desarrollo." },
+    { country: "Venezuela", marketValue: 50, medicinal: false, industrial: false, adultUse: false, description: "Leyes estrictas contra el cannabis." },
+    { country: "Cabo Verde", marketValue: 40, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal en discusión." },
+    { country: "Catar", marketValue: 80, medicinal: true, industrial: false, adultUse: false, description: "Mercado en desarrollo para uso medicinal." },
+    { country: "Rumanía", marketValue: 120, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal regulado." },
+    { country: "Grecia", marketValue: 200, medicinal: true, industrial: true, adultUse: false, description: "Mercado en desarrollo con enfoque medicinal." },
+    { country: "Serbia", marketValue: 90, medicinal: true, industrial: false, adultUse: false, description: "Regulación de cannabis medicinal en desarrollo." },
+    { country: "Croacia", marketValue: 110, medicinal: true, industrial: false, adultUse: false, description: "Regulación para uso medicinal." },
+    { country: "Malta", marketValue: 100, medicinal: true, industrial: false, adultUse: true, description: "Legalización del uso recreativo y medicinal." },
+    { country: "Georgia", marketValue: 120, medicinal: true, industrial: false, adultUse: true, description: "Uso recreativo y medicinal legalizado." },
+    { country: "Hong Kong", marketValue: 60, medicinal: false, industrial: false, adultUse: false, description: "Leyes estrictas contra el cannabis." },
+    { country: "Zimbabue", marketValue: 70, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal regulado." },
+    { country: "Antigua y Barbuda", marketValue: 50, medicinal: true, industrial: false, adultUse: false, description: "Regulación del cannabis medicinal en desarrollo." },
+    { country: "San Cristóbal y Nieves", marketValue: 40, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal aprobado." },
+    { country: "Jamaica", marketValue: 90, medicinal: true, industrial: true, adultUse: true, description: "Mercado establecido para uso recreativo y medicinal." },
+    { country: "Dominica", marketValue: 30, medicinal: true, industrial: false, adultUse: false, description: "Regulación en cannabis medicinal en discusión." },
+    { country: "Barbados", marketValue: 50, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal regulado." },
+    { country: "Bahamas", marketValue: 40, medicinal: true, industrial: false, adultUse: false, description: "Regulación en cannabis medicinal en desarrollo." },
+    { country: "Belice", marketValue: 60, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal permitido." },
+  ];  
 
   useEffect(() => {
     setTotalMarketValue(medicalValue + hempValue + adultUseValue);
@@ -174,6 +229,23 @@ const CannabisMarketSimulator = () => {
 
   const PIBDominicana = 11200 // en millones
 
+  const filteredMarkets = similarMarketsData.filter(market => {
+    const isMedicinalSelected = medicalValue > 0;
+    const isIndustrialSelected = hempValue > 0;
+    const isAdultUseSelected = adultUseValue > 0;
+    
+    const isMarketValueValid = market.marketValue <= totalMarketValue; // Add your totalMarketValue variable here
+  
+    return (
+      isMarketValueValid && // Include the marketValue condition
+      (
+        (isMedicinalSelected && market.medicinal) ||
+        (isIndustrialSelected && market.industrial) ||
+        (isAdultUseSelected && market.adultUse)
+      )
+    );
+  });
+
   return (
     <div className="space-y-6">
       {/* Valor de Mercado del Cannabis por Segmento */}
@@ -216,6 +288,27 @@ const CannabisMarketSimulator = () => {
             />
           </div>
           <p className="text-lg font-bold mt-4">Valor Total del Mercado: US$ {totalMarketValue} millones</p>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Mercados Regulados Similares</CardTitle>
+        </CardHeader>
+        <CardContent>
+        {filteredMarkets.length > 0 ? (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {filteredMarkets.map((market, index) => (
+          <div key={index} className="border p-4 rounded">
+            <h3 className="font-bold">{market.country}</h3>
+            <p>Valor de Mercado: US$ {market.marketValue} millones</p>
+            <p>{market.description}</p>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p>No hay mercados similares para mostrar.</p>
+    )}
         </CardContent>
       </Card>
 
@@ -333,70 +426,91 @@ const CannabisMarketSimulator = () => {
           </Table>
         </CardContent>
         <div className="m-4 text-sm text-muted-foreground">
-          <p>Nota: Los valores representan la cantidad estimada de licencias que se otorgarán en cada categoría.</p>
+          <p>
+            Nota: Las tarifas de licencia para los negocios de cannabis se determinan típicamente en función del tamaño de la operación para los fines de cultivo, la destinacion del producto para fines industriales y medicinales, y el interes economico-social del estado. Por ejemplo, una operación de cultivo de 50,000 pies cuadrados podría pagar RD$500,000 por una licencia, mientras que una operación de 5,000 pies cuadrados pagaría RD$50,000. Los reglamentos seran creados por las entidades competentes (ver CAPÍTULO IV - AUTORIZACIONES, LICENCIAS, REQUISITOS Y REGISTROS)
+          </p>
         </div>
       </Card>
 
       {/* Recaudación Estimada por Segmentos en 3 columnas */}
-      <div className="flex space-x-4">
+      <div className="grid gap-4 w-full md:grid-cols-2 xl:grid-cols-3">
       {segmentedTaxes.map((category, index) => (
-          <Card key={index} className="flex-1">
-            <CardHeader>
-              <CardTitle>{category.category}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Categoría</TableHead>
-                    <TableHead>Porcentaje/Monto</TableHead>
-                    <TableHead>Recaudación Estimada (Millones de US$)</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {category.segments.map((segment, segIndex) => (
-                    <TableRow key={segIndex}>
-                      <TableCell>{segment.name}</TableCell>
-                      <TableCell>
-                        {segment.isLicenseFee ? (
-                          <Select 
-                            value={segment.fee.toString()} 
-                            onValueChange={(value) => segment.setFee(parseInt(value))}
-                          >
-                            <SelectTrigger className="w-32">
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {licenseOptions.map((option) => (
-                                <SelectItem key={option} value={option.toString()}>
-                                  {option.toLocaleString()}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        ) : (
-                          `${segment.percentage}%`
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        {segment.isLicenseFee 
-                          ? calculateLicenseRevenue(segment.fee, segment.multiplier)
-                          : calculateRevenue(segment.percentage, getBaseValueForSegment(segment.types))
-                        }
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                  <TableRow className="font-bold">
-                    <TableCell>Total Recaudación</TableCell>
-                    <TableCell></TableCell>
-                    <TableCell>{getTotalRevenueForCategory(category)} millones de US$</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+        <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900">
+              {category.category}
+            </h3>
+          </div>
+          
+          <div className="p-4 overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Categoría
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Porcentaje/Monto
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Recaudación Est. (M US$)
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {category.segments.map((segment, segIndex) => (
+                  <tr key={segIndex}>
+                    <td className="px-4 py-3 whitespace-normal text-sm text-gray-900">
+                      {segment.name}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      {segment.isLicenseFee ? (
+                        <select 
+                          value={segment.fee}
+                          onChange={(e) => segment.setFee(parseInt(e.target.value))}
+                          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                        >
+                          {licenseOptions.map((option) => (
+                            <option key={option} value={option}>
+                              {option.toLocaleString()}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        `${segment.percentage}%`
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-900">
+                      {segment.isLicenseFee 
+                        ? calculateLicenseRevenue(segment.fee, segment.multiplier)
+                        : calculateRevenue(segment.percentage, getBaseValueForSegment(segment.types))
+                      }
+                    </td>
+                  </tr>
+                ))}
+                <tr className="bg-gray-50">
+                  <td className="px-4 py-3 text-sm font-bold text-gray-900">
+                    Total Recaudación
+                  </td>
+                  <td className="px-4 py-3"></td>
+                  <td className="px-4 py-3 text-sm font-bold text-gray-900">
+                    {getTotalRevenueForCategory(category)} millones de US$
+                  </td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td colSpan={2} className="px-4 py-3 text-sm font-bold text-gray-900">
+                    % / PIB
+                  </td>
+                  <td className="px-4 py-3 text-sm text-gray-900">
+                    {(getTotalRevenueForCategory(category) * 100 / PIBDominicana).toFixed(2)}%
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ))}
+    </div>
 
       {/* Distribución de Impuestos Recaudados */}
       <Card>
@@ -434,6 +548,10 @@ const CannabisMarketSimulator = () => {
         </CardContent>
       </Card>
 
+      <div className="text-sm text-muted-foreground">
+        <p>Nota: Los porcentajes son estimados basados en la propuesta de ley "LEY PARA LA REGULACIÓN Y CONTROL DEL CANNABIS: NUEVOS MERCADOS PARA EL DESARROLLO" y pueden variar según la implementación final. El impuesto específico al consumo de productos con cannabis es del 27% según el Artículo 36 de la ley propuesta. La distribución de los impuestos recaudados se basa en el Artículo 42 de la ley propuesta.</p>
+      </div>
+
       <Card>
       <CardHeader>
         <CardTitle>Distribución de Fondos Procuraduria 2023 <span style={{ fontSize: 12 }}>(<a href='https://dncd.gob.do/index.php/noticias1/noticias/item/1795-procuraduria-entrega-391-millones-a-instituciones-que-luchan-contra-las-drogas' target='_blank'>Link</a>)</span></CardTitle>
@@ -470,12 +588,6 @@ const CannabisMarketSimulator = () => {
         <p>Total distribuido: RD$391,156,067.85</p>
       </CardContent>
     </Card>
-
-      <div className="text-sm text-muted-foreground">
-        <p>Nota: Los porcentajes son estimados basados en la ley propuesta y pueden variar según la implementación final.</p>
-        <p>El impuesto específico al consumo de productos con cannabis es del 27% según el Artículo 36 de la ley propuesta.</p>
-        <p>La distribución de los impuestos recaudados se basa en el Artículo 42 de la ley propuesta.</p>
-      </div>
     </div>
   );
 };
