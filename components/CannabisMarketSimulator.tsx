@@ -561,11 +561,10 @@ const CannabisMarketSimulator = () => {
             </TableBody>
           </Table>
         </CardContent>
+        <div className="m-4 mt-0 text-sm text-muted-foreground">
+          <p>Nota: Los porcentajes son estimados basados en la propuesta de ley &quot;LEY PARA LA REGULACIÓN Y CONTROL DEL CANNABIS: NUEVOS MERCADOS PARA EL DESARROLLO&quot; y pueden variar según la implementación final. El impuesto específico al consumo de productos con cannabis es del 27% según el Artículo 36 de la ley propuesta. La distribución de los impuestos recaudados se basa en el Artículo 42 de la ley propuesta.</p>
+        </div>
       </Card>
-
-      <div className="text-sm text-muted-foreground">
-        <p>Nota: Los porcentajes son estimados basados en la propuesta de ley &quot;LEY PARA LA REGULACIÓN Y CONTROL DEL CANNABIS: NUEVOS MERCADOS PARA EL DESARROLLO&quot; y pueden variar según la implementación final. El impuesto específico al consumo de productos con cannabis es del 27% según el Artículo 36 de la ley propuesta. La distribución de los impuestos recaudados se basa en el Artículo 42 de la ley propuesta.</p>
-      </div>
 
       <Card>
       <CardHeader>
