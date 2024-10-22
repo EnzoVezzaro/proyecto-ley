@@ -5,6 +5,7 @@ import { Slider } from "@/components/ui/slider";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from './ui/input';
 
 const CannabisMarketSimulator = () => {
   const [medicalValue, setMedicalValue] = useState(50);
@@ -12,21 +13,34 @@ const CannabisMarketSimulator = () => {
   const [adultUseValue, setAdultUseValue] = useState(20);
   const [totalMarketValue, setTotalMarketValue] = useState(100);
 
-  const [medicalCultivationFee, setMedicalCultivationFee] = useState(500);
+  const [medicalCultivationFee, setMedicalCultivationFee] = useState(5000);
   const [medicalProductionFee, setMedicalProductionFee] = useState(500);
   const [medicalCommerceFee, setMedicalCommerceFee] = useState(500);
 
-  const [hempCultivationFee, setHempCultivationFee] = useState(500);
   const [hempProductionFee, setHempProductionFee] = useState(500);
   const [hempCommerceFee, setHempCommerceFee] = useState(500);
-  const [hempMedicalCultivationFee, setHempMedicalCultivationFee] = useState(500);
+  const [hempCultivationFee, setHempCultivationFee] = useState(5000);
+  const [hempMedicalCultivationFee, setHempMedicalCultivationFee] = useState(5000);
 
-  const [adultUseCultivationFee, setAdultUseCultivationFee] = useState(500);
+  const [adultUseCultivationFee, setAdultUseCultivationFee] = useState(5000);
   const [adultUseProductionFee, setAdultUseProductionFee] = useState(500);
   const [adultUseCommerceFee, setAdultUseCommerceFee] = useState(500);
 
-  const LICENSE_MULTIPLIER = 1000;
   const licenseOptions = [0, 500, 5000, 10000, 15000, 25000, 50000, 100000];
+  
+  const [medicalCultivationMultiplier, setMedicalCultivationMultiplier] = useState(1000);
+  const [medicalProductionMultiplier, setMedicalProductionMultiplier] = useState(1000);
+  const [medicalCommerceMultiplier, setMedicalCommerceMultiplier] = useState(1000);
+
+  const [hempProductionMultiplier, setHempProductionMultiplier] = useState(1000);
+  const [hempCommerceMultiplier, setHempCommerceMultiplier] = useState(1000);
+  const [hempCultivationMultiplier, setHempCultivationMultiplier] = useState(1000);
+  const [hempMedicalCultivationMultiplier, setHempMedicalCultivationMultiplier] = useState(1000);
+
+  const [adultUseCultivationMultiplier, setAdultUseCultivationMultiplier] = useState(1000);
+  const [adultUseProductionMultiplier, setAdultUseProductionMultiplier] = useState(1000);
+  const [adultUseCommerceMultiplier, setAdultUseCommerceMultiplier] = useState(1000);
+
 
   useEffect(() => {
     setTotalMarketValue(medicalValue + hempValue + adultUseValue);
@@ -36,8 +50,8 @@ const CannabisMarketSimulator = () => {
     return (baseValue * percentage / 100).toFixed(2);
   };
 
-  const calculateLicenseRevenue = (fee: any) => {
-    return ((fee * LICENSE_MULTIPLIER) / 1000000).toFixed(2); // Convert to millions
+  const calculateLicenseRevenue = (fee, multiplier) => {
+    return ((fee * multiplier) / 1000000).toFixed(2); // Convert to millions
   };
 
   
@@ -46,9 +60,9 @@ const CannabisMarketSimulator = () => {
       category: "Cannabis Medicinal",
       segments: [
         { name: "Impuesto Específico al Consumo", percentage: 0, types: ["medical"] },
-        { name: "Licencias - Producción", isLicenseFee: true, fee: medicalProductionFee, setFee: setMedicalProductionFee, types: ["medical"] },
-        { name: "Licencias - Industrialización y comercio", isLicenseFee: true, fee: medicalCommerceFee, setFee: setMedicalCommerceFee, types: ["medical"] },
-        { name: "Licencias - Cultivo con fines médicos", isLicenseFee: true, fee: medicalCultivationFee, setFee: setMedicalCultivationFee, types: ["medical"] },
+        { name: "Licencias - Producción", isLicenseFee: true, fee: medicalProductionFee, multiplier: medicalProductionMultiplier, setFee: setMedicalProductionFee, types: ["medical"] },
+        { name: "Licencias - Industrialización y comercio", isLicenseFee: true, fee: medicalCommerceFee, multiplier: medicalCommerceMultiplier, setFee: setMedicalCommerceFee, types: ["medical"] },
+        { name: "Licencias - Cultivo con fines médicos", isLicenseFee: true, fee: medicalCultivationFee, multiplier: medicalCultivationMultiplier, setFee: setMedicalCultivationFee, types: ["medical"] },
         { name: "Impuesto sobre la Renta - Empresas Productoras", percentage: 7, types: ["medical"] },
         { name: "Impuesto sobre la Renta - Empresas Industrializadoras", percentage: 5, types: ["medical"] },
         { name: "Impuesto sobre la Renta - Comercios", percentage: 10, types: ["medical"] },
@@ -58,10 +72,10 @@ const CannabisMarketSimulator = () => {
       category: "Cáñamo Industrial",
       segments: [
         { name: "Impuesto Específico al Consumo", percentage: 27, types: ["hemp"] },
-        { name: "Licencias - Producción", isLicenseFee: true, fee: hempProductionFee, setFee: setHempProductionFee, types: ["hemp"] },
-        { name: "Licencias - Industrialización y comercio", isLicenseFee: true, fee: hempCommerceFee, setFee: setHempCommerceFee, types: ["hemp"] },
-        { name: "Licencias - Cultivo con fines industriales", isLicenseFee: true, fee: hempCultivationFee, setFee: setHempCultivationFee, types: ["hemp"] },
-        { name: "Licencias - Cultivo con fines médicos", isLicenseFee: true, fee: hempMedicalCultivationFee, setFee: setHempMedicalCultivationFee, types: ["hemp"] },
+        { name: "Licencias - Producción", isLicenseFee: true, fee: hempProductionFee, multiplier: hempProductionMultiplier, setFee: setHempProductionFee, types: ["hemp"] },
+        { name: "Licencias - Industrialización y comercio", isLicenseFee: true, fee: hempCommerceFee, multiplier: hempCommerceMultiplier, setFee: setHempCommerceFee, types: ["hemp"] },
+        { name: "Licencias - Cultivo con fines industriales", isLicenseFee: true, fee: hempCultivationFee, multiplier: hempCultivationMultiplier, setFee: setHempCultivationFee, types: ["hemp"] },
+        { name: "Licencias - Cultivo con fines médicos", isLicenseFee: true, fee: hempMedicalCultivationFee, multiplier: hempMedicalCultivationMultiplier, setFee: setHempMedicalCultivationFee, types: ["hemp"] },
         { name: "Impuesto sobre la Renta - Empresas Productoras", percentage: 7, types: ["hemp"] },
         { name: "Impuesto sobre la Renta - Empresas Industrializadoras", percentage: 5, types: ["hemp"] },
         { name: "Impuesto sobre la Renta - Comercios", percentage: 10, types: ["hemp"] },
@@ -71,9 +85,9 @@ const CannabisMarketSimulator = () => {
       category: "Uso Adulto",
       segments: [
         { name: "Impuesto Específico al Consumo", percentage: 27, types: ["adultUse"] },
-        { name: "Licencias - Producción", isLicenseFee: true, fee: adultUseProductionFee, setFee: setAdultUseProductionFee, types: ["adultUse"] },
-        { name: "Licencias - Industrialización y comercio", isLicenseFee: true, fee: adultUseCommerceFee, setFee: setAdultUseCommerceFee, types: ["adultUse"] },
-        { name: "Licencias - Cultivo con fines de uso adulto", isLicenseFee: true, fee: adultUseCultivationFee, setFee: setAdultUseCultivationFee, types: ["adultUse"] },
+        { name: "Licencias - Producción", isLicenseFee: true, fee: adultUseProductionFee, multiplier: adultUseProductionMultiplier, setFee: setAdultUseProductionFee, types: ["adultUse"] },
+        { name: "Licencias - Industrialización y comercio", isLicenseFee: true, fee: adultUseCommerceFee, multiplier: adultUseCommerceMultiplier, setFee: setAdultUseCommerceFee, types: ["adultUse"] },
+        { name: "Licencias - Cultivo con fines de uso adulto", isLicenseFee: true, fee: adultUseCultivationFee, multiplier: adultUseCultivationMultiplier, setFee: setAdultUseCultivationFee, types: ["adultUse"] },
         { name: "Impuesto sobre la Renta - Empresas Productoras", percentage: 7, types: ["adultUse"] },
         { name: "Impuesto sobre la Renta - Empresas Industrializadoras", percentage: 5, types: ["adultUse"] },
         { name: "Impuesto sobre la Renta - Comercios", percentage: 10, types: ["adultUse"] },
@@ -95,7 +109,7 @@ const CannabisMarketSimulator = () => {
   const getTotalRevenueForCategory = (category) => {
     return category.segments.reduce((sum, segment) => {
       if (segment.isLicenseFee) {
-        return sum + Number(calculateLicenseRevenue(segment.fee));
+        return sum + Number(calculateLicenseRevenue(segment.fee, segment.multiplier));
       }
       return sum + Number(calculateRevenue(segment.percentage, getBaseValueForSegment(segment.types)));
     }, 0).toFixed(2);
@@ -205,6 +219,124 @@ const CannabisMarketSimulator = () => {
         </CardContent>
       </Card>
 
+      <Card>
+        <CardHeader>
+          <CardTitle>Costos de Licencia (US$)</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Tipo de Licencia</TableHead>
+                <TableHead>Cannabis Medicinal</TableHead>
+                <TableHead>Cáñamo Industrial</TableHead>
+                <TableHead>Uso Adulto</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>Cultivo</TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    value={medicalCultivationMultiplier}
+                    onChange={(e) => setMedicalCultivationMultiplier(Number(e.target.value))}
+                    className="w-32"
+                  />
+                </TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    value={hempCultivationMultiplier}
+                    onChange={(e) => setHempCultivationMultiplier(Number(e.target.value))}
+                    className="w-32"
+                  />
+                </TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    value={adultUseCultivationMultiplier}
+                    onChange={(e) => setAdultUseCultivationMultiplier(Number(e.target.value))}
+                    className="w-32"
+                  />
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Producción</TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    value={medicalProductionMultiplier}
+                    onChange={(e) => setMedicalProductionMultiplier(Number(e.target.value))}
+                    className="w-32"
+                  />
+                </TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    value={hempProductionMultiplier}
+                    onChange={(e) => setHempProductionMultiplier(Number(e.target.value))}
+                    className="w-32"
+                  />
+                </TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    value={adultUseProductionMultiplier}
+                    onChange={(e) => setAdultUseProductionMultiplier(Number(e.target.value))}
+                    className="w-32"
+                  />
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Industrialización y Comercio</TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    value={medicalCommerceMultiplier}
+                    onChange={(e) => setMedicalCommerceMultiplier(Number(e.target.value))}
+                    className="w-32"
+                  />
+                </TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    value={hempCommerceMultiplier}
+                    onChange={(e) => setHempCommerceMultiplier(Number(e.target.value))}
+                    className="w-32"
+                  />
+                </TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    value={adultUseCommerceMultiplier}
+                    onChange={(e) => setAdultUseCommerceMultiplier(Number(e.target.value))}
+                    className="w-32"
+                  />
+                </TableCell>
+              </TableRow>
+              {/* Additional row for Hemp Medical Cultivation */}
+              <TableRow>
+                <TableCell>Cultivo con Fines Médicos</TableCell>
+                <TableCell>-</TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    value={hempMedicalCultivationMultiplier}
+                    onChange={(e) => setHempMedicalCultivationMultiplier(Number(e.target.value))}
+                    className="w-32"
+                  />
+                </TableCell>
+                <TableCell>-</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </CardContent>
+        <div className="m-4 text-sm text-muted-foreground">
+          <p>Nota: Los valores representan la cantidad estimada de licencias que se otorgarán en cada categoría.</p>
+        </div>
+      </Card>
+
       {/* Recaudación Estimada por Segmentos en 3 columnas */}
       <div className="flex space-x-4">
       {segmentedTaxes.map((category, index) => (
@@ -248,7 +380,7 @@ const CannabisMarketSimulator = () => {
                       </TableCell>
                       <TableCell>
                         {segment.isLicenseFee 
-                          ? calculateLicenseRevenue(segment.fee)
+                          ? calculateLicenseRevenue(segment.fee, segment.multiplier)
                           : calculateRevenue(segment.percentage, getBaseValueForSegment(segment.types))
                         }
                       </TableCell>
