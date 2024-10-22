@@ -4,12 +4,29 @@ import React, { useState, useEffect } from 'react';
 import { Slider } from "@/components/ui/slider";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const CannabisMarketSimulator = () => {
   const [medicalValue, setMedicalValue] = useState(50);
   const [hempValue, setHempValue] = useState(30);
   const [adultUseValue, setAdultUseValue] = useState(20);
   const [totalMarketValue, setTotalMarketValue] = useState(100);
+
+  const [medicalCultivationFee, setMedicalCultivationFee] = useState(500);
+  const [medicalProductionFee, setMedicalProductionFee] = useState(500);
+  const [medicalCommerceFee, setMedicalCommerceFee] = useState(500);
+
+  const [hempCultivationFee, setHempCultivationFee] = useState(500);
+  const [hempProductionFee, setHempProductionFee] = useState(500);
+  const [hempCommerceFee, setHempCommerceFee] = useState(500);
+  const [hempMedicalCultivationFee, setHempMedicalCultivationFee] = useState(500);
+
+  const [adultUseCultivationFee, setAdultUseCultivationFee] = useState(500);
+  const [adultUseProductionFee, setAdultUseProductionFee] = useState(500);
+  const [adultUseCommerceFee, setAdultUseCommerceFee] = useState(500);
+
+  const LICENSE_MULTIPLIER = 1000;
+  const licenseOptions = [0, 500, 5000, 10000, 15000, 25000, 50000, 100000];
 
   useEffect(() => {
     setTotalMarketValue(medicalValue + hempValue + adultUseValue);
@@ -19,14 +36,19 @@ const CannabisMarketSimulator = () => {
     return (baseValue * percentage / 100).toFixed(2);
   };
 
+  const calculateLicenseRevenue = (fee: any) => {
+    return ((fee * LICENSE_MULTIPLIER) / 1000000).toFixed(2); // Convert to millions
+  };
+
+  
   const segmentedTaxes = [
     {
       category: "Cannabis Medicinal",
       segments: [
         { name: "Impuesto Específico al Consumo", percentage: 0, types: ["medical"] },
-        { name: "Licencias - Producción", percentage: 2, types: ["medical"] },
-        { name: "Licencias - Industrialización y comercio", percentage: 2, types: ["medical"] },
-        { name: "Licencias - Cultivo con fines médicos", percentage: 1, types: ["medical"] },
+        { name: "Licencias - Producción", isLicenseFee: true, fee: medicalProductionFee, setFee: setMedicalProductionFee, types: ["medical"] },
+        { name: "Licencias - Industrialización y comercio", isLicenseFee: true, fee: medicalCommerceFee, setFee: setMedicalCommerceFee, types: ["medical"] },
+        { name: "Licencias - Cultivo con fines médicos", isLicenseFee: true, fee: medicalCultivationFee, setFee: setMedicalCultivationFee, types: ["medical"] },
         { name: "Impuesto sobre la Renta - Empresas Productoras", percentage: 7, types: ["medical"] },
         { name: "Impuesto sobre la Renta - Empresas Industrializadoras", percentage: 5, types: ["medical"] },
         { name: "Impuesto sobre la Renta - Comercios", percentage: 10, types: ["medical"] },
@@ -36,10 +58,10 @@ const CannabisMarketSimulator = () => {
       category: "Cáñamo Industrial",
       segments: [
         { name: "Impuesto Específico al Consumo", percentage: 27, types: ["hemp"] },
-        { name: "Licencias - Producción", percentage: 2, types: ["hemp"] },
-        { name: "Licencias - Industrialización y comercio", percentage: 2, types: ["hemp"] },
-        { name: "Licencias - Cultivo con fines industriales", percentage: 1, types: ["hemp"] },
-        { name: "Licencias - Cultivo con fines médicos", percentage: 1, types: ["hemp"] },
+        { name: "Licencias - Producción", isLicenseFee: true, fee: hempProductionFee, setFee: setHempProductionFee, types: ["hemp"] },
+        { name: "Licencias - Industrialización y comercio", isLicenseFee: true, fee: hempCommerceFee, setFee: setHempCommerceFee, types: ["hemp"] },
+        { name: "Licencias - Cultivo con fines industriales", isLicenseFee: true, fee: hempCultivationFee, setFee: setHempCultivationFee, types: ["hemp"] },
+        { name: "Licencias - Cultivo con fines médicos", isLicenseFee: true, fee: hempMedicalCultivationFee, setFee: setHempMedicalCultivationFee, types: ["hemp"] },
         { name: "Impuesto sobre la Renta - Empresas Productoras", percentage: 7, types: ["hemp"] },
         { name: "Impuesto sobre la Renta - Empresas Industrializadoras", percentage: 5, types: ["hemp"] },
         { name: "Impuesto sobre la Renta - Comercios", percentage: 10, types: ["hemp"] },
@@ -49,9 +71,9 @@ const CannabisMarketSimulator = () => {
       category: "Uso Adulto",
       segments: [
         { name: "Impuesto Específico al Consumo", percentage: 27, types: ["adultUse"] },
-        { name: "Licencias - Producción", percentage: 2, types: ["adultUse"] },
-        { name: "Licencias - Industrialización y comercio", percentage: 2, types: ["adultUse"] },
-        { name: "Licencias - Cultivo con fines de uso adulto", percentage: 1, types: ["adultUse"] },
+        { name: "Licencias - Producción", isLicenseFee: true, fee: adultUseProductionFee, setFee: setAdultUseProductionFee, types: ["adultUse"] },
+        { name: "Licencias - Industrialización y comercio", isLicenseFee: true, fee: adultUseCommerceFee, setFee: setAdultUseCommerceFee, types: ["adultUse"] },
+        { name: "Licencias - Cultivo con fines de uso adulto", isLicenseFee: true, fee: adultUseCultivationFee, setFee: setAdultUseCultivationFee, types: ["adultUse"] },
         { name: "Impuesto sobre la Renta - Empresas Productoras", percentage: 7, types: ["adultUse"] },
         { name: "Impuesto sobre la Renta - Empresas Industrializadoras", percentage: 5, types: ["adultUse"] },
         { name: "Impuesto sobre la Renta - Comercios", percentage: 10, types: ["adultUse"] },
@@ -70,14 +92,19 @@ const CannabisMarketSimulator = () => {
     }, 0);
   };
 
-  const getTotalRevenueForCategory = (category: any) => {
-    return category.segments.reduce((sum: any, segment: any) =>
-      sum + Number(calculateRevenue(segment.percentage, getBaseValueForSegment(segment.types))), 0
-    ).toFixed(2);
+  const getTotalRevenueForCategory = (category) => {
+    return category.segments.reduce((sum, segment) => {
+      if (segment.isLicenseFee) {
+        return sum + Number(calculateLicenseRevenue(segment.fee));
+      }
+      return sum + Number(calculateRevenue(segment.percentage, getBaseValueForSegment(segment.types)));
+    }, 0).toFixed(2);
   };
 
-  const getTotalPercentageForCategory = (category: any) => {
-    return category.segments.reduce((sum: any, segment: any) => sum + segment.percentage, 0);
+  const getTotalPercentageForCategory = (category) => {
+    return category.segments.reduce((sum, segment) => 
+      segment.isLicenseFee ? sum : sum + segment.percentage, 0
+    );
   };
 
   const calculateTotalTaxRevenue = () => {
@@ -180,7 +207,7 @@ const CannabisMarketSimulator = () => {
 
       {/* Recaudación Estimada por Segmentos en 3 columnas */}
       <div className="flex space-x-4">
-        {segmentedTaxes.map((category, index) => (
+      {segmentedTaxes.map((category, index) => (
           <Card key={index} className="flex-1">
             <CardHeader>
               <CardTitle>{category.category}</CardTitle>
@@ -190,7 +217,7 @@ const CannabisMarketSimulator = () => {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Categoría</TableHead>
-                    <TableHead>Porcentaje</TableHead>
+                    <TableHead>Porcentaje/Monto</TableHead>
                     <TableHead>Recaudación Estimada (Millones de US$)</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -198,24 +225,39 @@ const CannabisMarketSimulator = () => {
                   {category.segments.map((segment, segIndex) => (
                     <TableRow key={segIndex}>
                       <TableCell>{segment.name}</TableCell>
-                      <TableCell>{segment.percentage}%</TableCell>
-                      <TableCell>{calculateRevenue(segment.percentage, getBaseValueForSegment(segment.types))}</TableCell>
+                      <TableCell>
+                        {segment.isLicenseFee ? (
+                          <Select 
+                            value={segment.fee.toString()} 
+                            onValueChange={(value) => segment.setFee(parseInt(value))}
+                          >
+                            <SelectTrigger className="w-32">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {licenseOptions.map((option) => (
+                                <SelectItem key={option} value={option.toString()}>
+                                  {option.toLocaleString()}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        ) : (
+                          `${segment.percentage}%`
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        {segment.isLicenseFee 
+                          ? calculateLicenseRevenue(segment.fee)
+                          : calculateRevenue(segment.percentage, getBaseValueForSegment(segment.types))
+                        }
+                      </TableCell>
                     </TableRow>
                   ))}
                   <TableRow className="font-bold">
                     <TableCell>Total Recaudación</TableCell>
-                    <TableCell colSpan={1}>
-                      <span className="text-sm">{getTotalPercentageForCategory(category)}%</span>
-                    </TableCell>
-                    <TableCell colSpan={1}>
-                      {getTotalRevenueForCategory(category)} millones de US$ 
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="font-bold">
-                    <TableCell colSpan={2}>% / PIB</TableCell>
-                    <TableCell>
-                      <span className="text-sm">{(getTotalRevenueForCategory(category) * 100 / PIBDominicana).toFixed(2)}%</span>
-                    </TableCell>
+                    <TableCell></TableCell>
+                    <TableCell>{getTotalRevenueForCategory(category)} millones de US$</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
