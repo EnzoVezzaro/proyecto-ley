@@ -9,7 +9,7 @@ import { Input } from './ui/input';
 
 const CannabisMarketSimulator = () => {
   const [medicalValue, setMedicalValue] = useState(50);
-  const [hempValue, setHempValue] = useState(30);
+  const [hempValue, setHempValue] = useState(20);
   const [adultUseValue, setAdultUseValue] = useState(20);
   const [totalMarketValue, setTotalMarketValue] = useState(100);
 
