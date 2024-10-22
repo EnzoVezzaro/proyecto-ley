@@ -270,6 +270,55 @@ const CannabisMarketSimulator = () => {
 
   const marketsToDisplay = showAllMarkets ? filteredMarkets : filteredMarkets.slice(0, 4);
 
+  const casosRegistrados: any = [
+    { delito: 'Robo calificado', total: 27630, porcentaje: 16.70 },
+    { delito: 'Violencia intrafamiliar', total: 24019, porcentaje: 14.52 },
+    { delito: 'Amenaza', total: 17921, porcentaje: 10.83 },
+    { delito: 'Código del menor NNA', total: 15128, porcentaje: 9.14 },
+    { delito: 'Golpes y heridas', total: 13121, porcentaje: 7.93 },
+    { delito: 'Crímenes y delitos de alta tecnología', total: 10170, porcentaje: 6.15 },
+    { delito: 'Violencia de género', total: 9729, porcentaje: 5.88 },
+    { delito: 'Droga, simple posesión', highlighted: true, total: 6235, porcentaje: 3.77 },
+    { delito: 'Ley de armas', total: 5376, porcentaje: 3.25 },
+    { delito: 'Daños y perjuicios a la cosa ajena', total: 4505, porcentaje: 2.72 },
+    { delito: 'Asociación de malhechores', total: 4136, porcentaje: 2.50 },
+    { delito: 'Abuso de confianza', total: 4135, porcentaje: 2.50 },
+    { delito: 'Estafa', total: 4084, porcentaje: 2.47 },
+    { delito: 'Código de trabajo', total: 3654, porcentaje: 2.21 },
+    { delito: 'Droga, traficante de droga', highlighted: true, total: 2161, porcentaje: 1.31 },
+    { delito: 'Agresión sexual', total: 1580, porcentaje: 0.95 },
+    { delito: 'Droga, distribución de droga', highlighted: true, total: 1205, porcentaje: 0.73 },
+    { delito: 'Protección animal y tenencia responsable', total: 1053, porcentaje: 0.64 },
+    { delito: 'Homicidio', total: 841, porcentaje: 0.51 },
+    { delito: 'Pérdida de documento de identidad', total: 775, porcentaje: 0.47 },
+    { delito: 'Falsificación', total: 652, porcentaje: 0.39 },
+    { delito: 'Droga, sanciones y circunstancias agravantes', highlighted: true, total: 649, porcentaje: 0.39 },
+    { delito: 'Tentativa de homicidio', total: 626, porcentaje: 0.38 },
+    { delito: 'Tránsito y seguridad vial', total: 615, porcentaje: 0.37 },
+    { delito: 'Violación sexual', total: 542, porcentaje: 0.33 },
+    { delito: 'Desaparición', total: 433, porcentaje: 0.26 },
+    { delito: 'Robo simple', total: 429, porcentaje: 0.26 },
+    { delito: 'Crímenes y delitos contra la propiedad', total: 305, porcentaje: 0.18 },
+    { delito: 'Difamación e injuria', total: 270, porcentaje: 0.16 },
+    { delito: 'Propiedad industrial, intelectual y derecho de autor', total: 243, porcentaje: 0.15 },
+    { delito: 'Tráfico ilícito de migrantes y trata de personas', total: 227, porcentaje: 0.14 },
+    { delito: 'Conflictos sociales', total: 148, porcentaje: 0.09 },
+    { delito: 'Medio ambiente y recursos naturales', total: 112, porcentaje: 0.07 },
+    { delito: 'Secuestro', total: 51, porcentaje: 0.03 },
+    { delito: 'Ley general de salud', total: 48, porcentaje: 0.03 },
+    { delito: 'Contra el lavado de activos', highlighted: true, total: 40, porcentaje: 0.02 },
+    { delito: 'Ley de cheques', total: 21, porcentaje: 0.01 },
+    { delito: 'Juegos de azar', total: 19, porcentaje: 0.01 },
+    { delito: 'Derechos humanos', total: 16, porcentaje: 0.01 },
+    { delito: 'Terrorismo', total: 9, porcentaje: 0.01 },
+    { delito: 'Proxenetismo', total: 7, porcentaje: 0.00 },
+    { delito: 'Prevaricación', total: 5, porcentaje: 0.00 },
+    { delito: 'Aborto y tentativa', total: 3, porcentaje: 0.00 },
+    { delito: 'Otros', total: 1994, porcentaje: 1.21 },
+    { delito: 'Indeterminados', total: 539, porcentaje: 0.33 },
+    { delito: 'Total', total: 165461, porcentaje: 100.00 }
+  ];
+
   return (
     <div className="space-y-6">
       {/* Valor de Mercado del Cannabis por Segmento */}
@@ -583,39 +632,83 @@ const CannabisMarketSimulator = () => {
       </Card>
 
       <Card>
+        <CardHeader>
+          <CardTitle>Distribución de Fondos PGR 2023 <span style={{ fontSize: 12 }}>(<a href='https://dncd.gob.do/index.php/noticias1/noticias/item/1795-procuraduria-entrega-391-millones-a-instituciones-que-luchan-contra-las-drogas' target='_blank'>Link</a>)</span></CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Institución/ONG</TableHead>
+                <TableHead>Porcentaje Asignado</TableHead>
+                <TableHead>Monto Asignado (RD$)</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {distributionTable.map((item, index) => (
+                <React.Fragment key={index}>
+                  <TableRow>
+                    <TableCell>{item.institution}</TableCell>
+                    <TableCell>{item.percentage}%</TableCell>
+                    <TableCell>{item.amount.toLocaleString()}</TableCell>
+                  </TableRow>
+                  {item.organizations && item.organizations.map((org, orgIndex) => (
+                    <TableRow key={orgIndex} style={{ backgroundColor: '#bdbdbd1c', fontSize: 12}}>
+                      <TableCell style={{ paddingLeft: '20px' }}>{org}</TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  ))}
+                </React.Fragment>
+              ))}
+            </TableBody>
+          </Table>
+          <br />
+          <p>Total distribuido: RD$391,156,067.85</p>
+        </CardContent>
+      </Card>
+
+      <Card className="my-4">
       <CardHeader>
-        <CardTitle>Distribución de Fondos Procuraduria 2023 <span style={{ fontSize: 12 }}>(<a href='https://dncd.gob.do/index.php/noticias1/noticias/item/1795-procuraduria-entrega-391-millones-a-instituciones-que-luchan-contra-las-drogas' target='_blank'>Link</a>)</span></CardTitle>
+        <CardTitle>
+          Número de Casos Registrados PGR 2023 {' '}
+          <span style={{ fontSize: 12 }}>
+            <a href="https://transparencia.pgr.gob.do/Inicio/VisualizarDocumento?DocumentoId=44382" target="_blank" rel="noopener noreferrer">
+            (Link)
+            </a>
+          </span>
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Institución/ONG</TableHead>
-              <TableHead>Porcentaje Asignado</TableHead>
-              <TableHead>Monto Asignado (RD$)</TableHead>
+              <TableHead>Delito</TableHead>
+              <TableHead>Total</TableHead>
+              <TableHead>%</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {distributionTable.map((item, index) => (
-              <React.Fragment key={index}>
-                <TableRow>
-                  <TableCell>{item.institution}</TableCell>
-                  <TableCell>{item.percentage}%</TableCell>
-                  <TableCell>{item.amount.toLocaleString()}</TableCell>
-                </TableRow>
-                {item.organizations && item.organizations.map((org, orgIndex) => (
-                  <TableRow key={orgIndex} style={{ backgroundColor: '#bdbdbd1c', fontSize: 12}}>
-                    <TableCell style={{ paddingLeft: '20px' }}>{org}</TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                  </TableRow>
-                ))}
-              </React.Fragment>
+            {casosRegistrados.map((caso: any, index: any) => (
+              <TableRow key={index} className={caso.delito === 'Total' ? 'font-bold' : ''} style={{ backgroundColor: caso.highlighted ? '#fff' : '#bdbdbd1c', fontSize: caso.highlighted ? 14 : 12, fontWeight: caso.highlighted ? 800 : 500 }}>
+                <TableCell>{caso.delito}</TableCell>
+                <TableCell>{caso.total.toLocaleString()}</TableCell>
+                <TableCell>{caso.porcentaje}%</TableCell>
+              </TableRow>
             ))}
           </TableBody>
         </Table>
         <br />
-        <p>Total distribuido: RD$391,156,067.85</p>
+        <p>Total de casos registrados: {casosRegistrados.find((c: any) => c.delito === 'Total').total.toLocaleString()}</p>
+        <p className="mt-4 text-sm">Fuente: Sistema Justicia 2.0.</p>
+        <p className="mt-4 text-sm">
+        Estas estadísticas suministra informaciones de los diferentes
+        casos que fueron tramitados por las fiscalías en la República Dominicana
+        durante el año 2023. Estos datos provienen de los sistemas de apoyo
+        a los fiscales denominados “Justicia XXI” y
+        “Justicia 2.0.”, desarrollados por
+        la PGR.
+        </p>
       </CardContent>
     </Card>
     </div>
