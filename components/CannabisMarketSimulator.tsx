@@ -233,18 +233,26 @@ const CannabisMarketSimulator = () => {
     const isMedicinalSelected = medicalValue > 0;
     const isIndustrialSelected = hempValue > 0;
     const isAdultUseSelected = adultUseValue > 0;
-    
-    const isMarketValueValid = market.marketValue <= totalMarketValue; // Add your totalMarketValue variable here
-  
-    return (
-      isMarketValueValid && // Include the marketValue condition
-      (
-        (isMedicinalSelected && market.medicinal) ||
-        (isIndustrialSelected && market.industrial) ||
-        (isAdultUseSelected && market.adultUse)
-      )
-    );
+
+    const isMarketValueValid = market.marketValue <= totalMarketValue;
+
+    const matchesMedicinal = isMedicinalSelected ? market.medicinal : true;
+    const matchesIndustrial = isIndustrialSelected ? market.industrial : true;
+    const matchesAdultUse = isAdultUseSelected ? market.adultUse : true;
+
+    return isMarketValueValid && 
+           matchesMedicinal && 
+           matchesIndustrial && 
+           matchesAdultUse;
   });
+
+  const [showAllMarkets, setShowAllMarkets] = useState(false);
+
+  const handleShowMore = () => {
+    setShowAllMarkets(true);
+  };
+
+  const marketsToDisplay = showAllMarkets ? filteredMarkets : filteredMarkets.slice(0, 4);
 
   return (
     <div className="space-y-6">
@@ -296,19 +304,26 @@ const CannabisMarketSimulator = () => {
           <CardTitle>Mercados Regulados Similares</CardTitle>
         </CardHeader>
         <CardContent>
-        {filteredMarkets.length > 0 ? (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filteredMarkets.map((market, index) => (
-          <div key={index} className="border p-4 rounded">
-            <h3 className="font-bold">{market.country}</h3>
-            <p>Valor de Mercado: US$ {market.marketValue} millones</p>
-            <p>{market.description}</p>
-          </div>
-        ))}
-      </div>
-    ) : (
-      <p>No hay mercados similares para mostrar.</p>
-    )}
+          {filteredMarkets.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {marketsToDisplay.map((market, index) => (
+                <div key={index} className="border p-4 rounded">
+                  <h3 className="font-bold">{market.country}</h3>
+                  <p>Valor de Mercado: US$ {market.marketValue} millones</p>
+                  <p>{market.description}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No hay mercados similares para mostrar.</p>
+          )}
+          
+          {/* Show "Cargar Más" button if there are more than 4 markets */}
+          {!showAllMarkets && filteredMarkets.length > 4 && (
+            <button onClick={handleShowMore} className="mt-4 p-2 bg-blue-500 text-white rounded">
+              Cargar Todos
+            </button>
+          )}
         </CardContent>
       </Card>
 
