@@ -249,18 +249,19 @@ const CannabisMarketSimulator = () => {
     const isMedicinalSelected = medicalValue > 0;
     const isIndustrialSelected = hempValue > 0;
     const isAdultUseSelected = adultUseValue > 0;
-
+  
     const isMarketValueValid = market.marketValue <= totalMarketValue;
-
-    const matchesMedicinal = isMedicinalSelected ? market.medicinal : true;
-    const matchesIndustrial = isIndustrialSelected ? market.industrial : true;
-    const matchesAdultUse = isAdultUseSelected ? market.adultUse : true;
-
+  
+    const matchesMedicinal = isMedicinalSelected ? market.medicinal === true : market.medicinal === false;
+    const matchesIndustrial = isIndustrialSelected ? market.industrial === true : market.industrial === false;
+    const matchesAdultUse = isAdultUseSelected ? market.adultUse === true : market.adultUse === false;
+  
     return isMarketValueValid && 
            matchesMedicinal && 
            matchesIndustrial && 
            matchesAdultUse;
   });
+  
 
   const [showAllMarkets, setShowAllMarkets] = useState(false);
 
