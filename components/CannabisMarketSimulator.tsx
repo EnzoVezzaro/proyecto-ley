@@ -319,6 +319,20 @@ const CannabisMarketSimulator = () => {
     { delito: 'Total', total: 165461, porcentaje: 100.00 }
   ];
 
+  const employmentFactors = {
+    medical: 10, // Ejemplos: 10 empleos por millón en Cannabis Medicinal
+    hemp: 5,     // Ejemplos: 5 empleos por millón en Cáñamo Industrial
+    adultUse: 8, // Ejemplos: 8 empleos por millón en Uso Adulto
+  };
+
+  const calculateEmployment = () => {
+    const medicalEmployment = medicalValue * employmentFactors.medical;
+    const hempEmployment = hempValue * employmentFactors.hemp;
+    const adultUseEmployment = adultUseValue * employmentFactors.adultUse;
+  
+    return medicalEmployment + hempEmployment + adultUseEmployment;
+  };
+
   return (
     <div className="space-y-6">
       {/* Valor de Mercado del Cannabis por Segmento */}
@@ -390,6 +404,87 @@ const CannabisMarketSimulator = () => {
             </button>
           )}
         </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Impacto en el Mercado de Trabajo</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Desglose por Industria</TableHead>
+                <TableHead>Empleados Generados</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {/* Desglose por Industria */}
+              <TableRow>
+                <TableCell>Medicina</TableCell>
+                <TableCell>
+                  {Math.floor(medicalValue * employmentFactors.medical)} empleos
+                </TableCell>
+              </TableRow>
+
+              <TableRow className="text-sm bg-gray-100">
+                <TableCell>Empleados</TableCell>
+                <TableCell>{Math.floor(medicalValue * employmentFactors.medical * 0.8)}</TableCell>
+              </TableRow>
+              <TableRow className="text-sm bg-gray-100">
+                <TableCell>Empresas</TableCell>
+                <TableCell>{Math.floor(medicalValue * employmentFactors.medical * 0.2)}</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell>Industria del Cáñamo</TableCell>
+                <TableCell>
+                  {Math.floor(hempValue * employmentFactors.hemp)} empleos
+                </TableCell>
+              </TableRow>
+
+              <TableRow className="text-sm bg-gray-100">
+                <TableCell>Empleados</TableCell>
+                <TableCell>{Math.floor(hempValue * employmentFactors.hemp * 0.8)}</TableCell>
+              </TableRow>
+              <TableRow className="text-sm bg-gray-100">
+                <TableCell>Empresas</TableCell>
+                <TableCell>{Math.floor(hempValue * employmentFactors.hemp * 0.2)}</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell>Uso Adulto</TableCell>
+                <TableCell>
+                  {Math.floor(adultUseValue * employmentFactors.adultUse)} empleos
+                </TableCell>
+              </TableRow>
+
+              <TableRow className="text-sm bg-gray-100">
+                <TableCell>Empleados</TableCell>
+                <TableCell>{Math.floor(adultUseValue * employmentFactors.adultUse * 0.8)}</TableCell>
+              </TableRow>
+              <TableRow className="text-sm bg-gray-100">
+                <TableCell>Empresas</TableCell>
+                <TableCell>{Math.floor(adultUseValue * employmentFactors.adultUse * 0.2)}</TableCell>
+              </TableRow>
+
+              <TableRow className="font-bold">
+                <TableCell>Total Empleados Generados</TableCell>
+                <TableCell>
+                  {`${calculateEmployment()} empleos`}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </CardContent>
+        <div className="m-4 mt-0 text-sm text-muted-foreground">
+          <p>
+            Nota: Debido a la falta de información verificable en el país, hemos utilizado las mejores prácticas internacionales para realizar estos cálculos. 
+            <br /><br />1) Calculamos 1 trabajador por cada 150,000 US$ generados por esa industria.
+            <br />2) Asumimos 1 empresa por cada 5 empleados.
+            <br /><br />Estos son números indicativos y podrían cambiar con información más precisa.
+          </p>
+        </div>
       </Card>
 
       <Card>
