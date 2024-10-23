@@ -101,11 +101,9 @@ const CannabisMarketSimulator = () => {
     { country: "Zimbabue", marketValue: 70, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal regulado." },
     { country: "Antigua y Barbuda", marketValue: 50, medicinal: true, industrial: false, adultUse: false, description: "Regulación del cannabis medicinal en desarrollo." },
     { country: "San Cristóbal y Nieves", marketValue: 40, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal aprobado." },
-    { country: "Jamaica", marketValue: 90, medicinal: true, industrial: true, adultUse: true, description: "Mercado establecido para uso recreativo y medicinal." },
-    { country: "Dominica", marketValue: 30, medicinal: true, industrial: false, adultUse: false, description: "Regulación en cannabis medicinal en discusión." },
-    { country: "Barbados", marketValue: 50, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal regulado." },
-    { country: "Bahamas", marketValue: 40, medicinal: true, industrial: false, adultUse: false, description: "Regulación en cannabis medicinal en desarrollo." },
-    { country: "Belice", marketValue: 60, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal permitido." },
+    { country: "Jamaica", marketValue: 41, medicinal: true, industrial: true, adultUse: true, description: "Mercado establecido para uso recreativo y medicinal." },
+    { country: "Barbados", marketValue: 5, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal regulado." },
+    { country: "Bahamas", marketValue: 5, medicinal: true, industrial: false, adultUse: false, description: "Regulación en cannabis medicinal en desarrollo." }
   ];  
 
   useEffect(() => {
