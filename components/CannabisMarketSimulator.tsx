@@ -200,8 +200,9 @@ const CannabisMarketSimulator = () => {
     { name: "Ministerio de Economía, Planificación y Desarrollo", percentage: 5, description: "Para atender el inciso c) del artículo 2" },
     { name: "Ministerio de Salud: Uso Medicinal", percentage: 10, description: "Para atender los incisos a) y e) del artículo 2" },
     { name: "Ministerio de Salud: Red integral de Asistencia ", percentage: 5, description: "Para atender el inciso f) del artículo 2" },
-    { name: "Instituto Dominicano del Cannabis (INDOCANNABIS)", percentage: 15, description: "Para fortalecer sus capacidades y asegurar el cumplimiento normativo" },
-    { name: "Otros destinos", percentage: 65, description: "Destino no especificado en el Artículo 42" },
+    { name: "Instituto Dominicano del Cannabis (INDOCANNABIS)", percentage: 15, description: "Para atender las funciones atribuidas en el articulo 29" },
+    { name: "Fondo INDOCANNABIS", percentage: 10, description: "Para atender necesidades emergentes como establecido en el articulo 34" },
+    { name: "Otros destinos", percentage: 65, description: "Destino no especificado en el artículo 47" },
   ];
 
   const distributionTable = [
@@ -712,7 +713,7 @@ const CannabisMarketSimulator = () => {
           </Table>
         </CardContent>
         <div className="m-4 mt-0 text-sm text-muted-foreground">
-          <p>Nota: Los porcentajes son estimados basados en la propuesta de ley &quot;LEY PARA LA REGULACIÓN Y CONTROL DEL CANNABIS: NUEVOS MERCADOS PARA EL DESARROLLO&quot; y pueden variar según la implementación final. El impuesto específico al consumo de productos con cannabis es del 27% según el Artículo 36 de la ley propuesta. La distribución de los impuestos recaudados se basa en el Artículo 42 de la ley propuesta.</p>
+          <p>Nota: Los porcentajes son estimados basados en la propuesta de ley &quot;LEY PARA LA REGULACIÓN Y CONTROL DEL CANNABIS: NUEVOS MERCADOS PARA EL DESARROLLO&quot; y pueden variar según la implementación final. El impuesto específico al consumo de productos con cannabis es del 27% según el Artículo 39 de la ley propuesta. La distribución de los impuestos recaudados se basa en el Artículo 49 de la ley propuesta.</p>
         </div>
       </Card>
 
