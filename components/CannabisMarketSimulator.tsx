@@ -42,29 +42,27 @@ const CannabisMarketSimulator = () => {
   const [adultUseCommerceMultiplier, setAdultUseCommerceMultiplier] = useState(1000);
 
   const similarMarketsData = [
-    { country: "Colombia", marketValue: 500, medicinal: true, industrial: true, adultUse: false, description: "Mercado en crecimiento con enfoque en cannabis medicinal." },
-    { country: "Canadá", marketValue: 800, medicinal: true, industrial: true, adultUse: true, description: "Mercado maduro con regulación completa para uso adulto." },
-    { country: "Uruguay", marketValue: 200, medicinal: true, industrial: true, adultUse: true, description: "Pionero en la legalización de cannabis." },
-    { country: "Estados Unidos", marketValue: 1000, medicinal: true, industrial: true, adultUse: true, description: "Mercado grande y diverso en varios estados." },
+    { country: "Colombia", marketValue: 300, medicinal: true, industrial: true, adultUse: false, description: "Mercado en crecimiento con enfoque en cannabis medicinal." },
+    { country: "Canadá", marketValue: 5500, medicinal: true, industrial: true, adultUse: true, description: "Mercado maduro con regulación completa para uso adulto." },
+    { country: "Uruguay", marketValue: 45, medicinal: true, industrial: true, adultUse: true, description: "Pionero en la legalización de cannabis." },
+    { country: "Estados Unidos", marketValue: 10000, medicinal: true, industrial: true, adultUse: true, description: "Mercado grande y diverso en varios estados." },
     { country: "México", marketValue: 300, medicinal: true, industrial: true, adultUse: false, description: "Mercado en desarrollo con leyes en proceso." },
-    { country: "Alemania", marketValue: 600, medicinal: true, industrial: true, adultUse: true, description: "Mercado establecido para cannabis medicinal." },
-    { country: "Australia", marketValue: 400, medicinal: true, industrial: true, adultUse: false, description: "Regulación en cannabis medicinal y industrial." },
-    { country: "Nueva Zelanda", marketValue: 350, medicinal: true, industrial: false, adultUse: false, description: "Cannabis medicinal regulado desde 2018." },
-    { country: "Sudáfrica", marketValue: 250, medicinal: true, industrial: true, adultUse: true, description: "Regulaciones en cannabis medicinal y uso recreativo." },
-    { country: "Portugal", marketValue: 180, medicinal: true, industrial: false, adultUse: false, description: "Regulación del cannabis medicinal." },
-    { country: "Italia", marketValue: 280, medicinal: true, industrial: true, adultUse: false, description: "Mercado para cannabis medicinal y productos derivados." },
-    { country: "Chile", marketValue: 220, medicinal: true, industrial: false, adultUse: false, description: "Regulación de cannabis medicinal." },
-    { country: "Islas Malvinas", marketValue: 100, medicinal: true, industrial: false, adultUse: false, description: "Regulación limitada al uso medicinal." },
-    { country: "Costa Rica", marketValue: 150, medicinal: true, industrial: false, adultUse: false, description: "Mercado en desarrollo con enfoque en cannabis medicinal." },
-    { country: "Bélgica", marketValue: 170, medicinal: true, industrial: false, adultUse: false, description: "Regulación de cannabis medicinal." },
-    { country: "Suiza", marketValue: 190, medicinal: true, industrial: true, adultUse: true, description: "Regulaciones para uso recreativo en ciertas condiciones." },
-    { country: "Luxemburgo", marketValue: 120, medicinal: true, industrial: false, adultUse: true, description: "Primer país europeo en legalizar el uso recreativo." },
-    { country: "Catar", marketValue: 70, medicinal: true, industrial: false, adultUse: false, description: "Regulación limitada al uso medicinal." },
-    { country: "Israel", marketValue: 450, medicinal: true, industrial: true, adultUse: false, description: "Líder en investigación y uso medicinal del cannabis." },
-    { country: "Malasia", marketValue: 90, medicinal: false, industrial: false, adultUse: false, description: "Las leyes son estrictas, pero se están considerando cambios." },
-    { country: "Tailandia", marketValue: 130, medicinal: true, industrial: true, adultUse: false, description: "Primer país del sudeste asiático en legalizar el cannabis medicinal." },
-    { country: "Panamá", marketValue: 110, medicinal: true, industrial: false, adultUse: false, description: "Regulación en cannabis medicinal en desarrollo." },
-    { country: "Cleveland (EE.UU.)", marketValue: 40, medicinal: true, industrial: true, adultUse: true, description: "Estado que ha legalizado tanto el uso medicinal como el recreativo." },
+    { country: "Alemania", marketValue: 32, medicinal: true, industrial: true, adultUse: true, description: "Mercado establecido para cannabis medicinal." },
+    { country: "Australia", marketValue: 87, medicinal: true, industrial: true, adultUse: false, description: "Regulación en cannabis medicinal y industrial." },
+    { country: "Nueva Zelanda", marketValue: 35, medicinal: true, industrial: false, adultUse: false, description: "Cannabis medicinal regulado desde 2018." },
+    { country: "Sudáfrica", marketValue: 1700, medicinal: true, industrial: true, adultUse: true, description: "Regulaciones en cannabis medicinal y uso recreativo." },
+    { country: "Portugal", marketValue: 35, medicinal: true, industrial: false, adultUse: false, description: "Regulación del cannabis medicinal." },
+    { country: "Italia", marketValue: 24, medicinal: true, industrial: true, adultUse: false, description: "Mercado para cannabis medicinal y productos derivados." },
+    { country: "Chile", marketValue: 174, medicinal: true, industrial: false, adultUse: false, description: "Regulación de cannabis medicinal." },
+    { country: "Costa Rica", marketValue: 2, medicinal: true, industrial: true, adultUse: false, description: "Mercado en desarrollo con enfoque en cannabis medicinal." },
+    { country: "Bélgica", marketValue: 21, medicinal: true, industrial: true, adultUse: false, description: "Regulación de cannabis medicinal." },
+    { country: "Suiza", marketValue: 241, medicinal: true, industrial: true, adultUse: true, description: "Regulaciones para uso recreativo en ciertas condiciones." },
+    { country: "Luxemburgo", marketValue: 120, medicinal: true, industrial: true, adultUse: true, description: "Primer país europeo en legalizar el uso recreativo." },
+    { country: "Israel", marketValue: 40, medicinal: true, industrial: true, adultUse: false, description: "Líder en investigación y uso medicinal del cannabis." },
+    { country: "Malasia", marketValue: 51, medicinal: true, industrial: true, adultUse: false, description: "Las leyes son estrictas, pero se están considerando cambios." },
+    { country: "Tailandia", marketValue: 130, medicinal: true, industrial: false, adultUse: false, description: "Primer país del sudeste asiático en legalizar el cannabis medicinal." },
+    { country: "Panamá", marketValue: 5, medicinal: true, industrial: true, adultUse: false, description: "Regulación en cannabis medicinal en desarrollo." },
+    { country: "Cleveland (EE.UU.)", marketValue: 484, medicinal: true, industrial: true, adultUse: true, description: "Estado que ha legalizado tanto el uso medicinal como el recreativo." },
     { country: "Virginia (EE.UU.)", marketValue: 60, medicinal: true, industrial: false, adultUse: true, description: "Legalización reciente del uso recreativo." },
     { country: "California (EE.UU.)", marketValue: 100, medicinal: true, industrial: true, adultUse: true, description: "Pionero en la legalización del cannabis medicinal y recreativo." },
     { country: "Colorado (EE.UU.)", marketValue: 70, medicinal: true, industrial: true, adultUse: true, description: "Uno de los primeros estados en legalizar el uso recreativo." },
@@ -82,18 +80,15 @@ const CannabisMarketSimulator = () => {
     { country: "Vermont (EE.UU.)", marketValue: 20, medicinal: true, industrial: true, adultUse: true, description: "Uso recreativo legalizado en 2018." },
     { country: "Rhode Island (EE.UU.)", marketValue: 40, medicinal: true, industrial: true, adultUse: true, description: "Legalización del uso recreativo en 2022." },
     { country: "Connecticut (EE.UU.)", marketValue: 45, medicinal: true, industrial: true, adultUse: true, description: "Uso recreativo legalizado en 2021." },
-    { country: "Mónaco", marketValue: 30, medicinal: false, industrial: false, adultUse: false, description: "Sin regulación actual." },
-    { country: "Noruega", marketValue: 180, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal regulado en desarrollo." },
-    { country: "Reino Unido", marketValue: 200, medicinal: true, industrial: true, adultUse: false, description: "Regulación del cannabis medicinal, pero uso recreativo prohibido." },
-    { country: "Japón", marketValue: 80, medicinal: false, industrial: false, adultUse: false, description: "Regulaciones estrictas y prohibiciones." },
-    { country: "República Checa", marketValue: 150, medicinal: true, industrial: true, adultUse: false, description: "Mercado de cannabis medicinal establecido." },
-    { country: "Eslovenia", marketValue: 90, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal regulado desde 2013." },
-    { country: "Ecuador", marketValue: 120, medicinal: true, industrial: false, adultUse: false, description: "Regulación en cannabis medicinal en desarrollo." },
-    { country: "Honduras", marketValue: 100, medicinal: true, industrial: false, adultUse: false, description: "Leyes en proceso para cannabis medicinal." },
-    { country: "Argentina", marketValue: 250, medicinal: true, industrial: false, adultUse: false, description: "Regulación del cannabis medicinal." },
-    { country: "Brasil", marketValue: 300, medicinal: true, industrial: false, adultUse: false, description: "Cannabis medicinal aprobado, pero con restricciones." },
-    { country: "Perú", marketValue: 160, medicinal: true, industrial: false, adultUse: false, description: "Regulación de cannabis medicinal en desarrollo." },
-    { country: "Venezuela", marketValue: 50, medicinal: false, industrial: false, adultUse: false, description: "Leyes estrictas contra el cannabis." },
+    { country: "Noruega", marketValue: 1, medicinal: true, industrial: true, adultUse: false, description: "Uso medicinal regulado en desarrollo." },
+    { country: "Reino Unido", marketValue: 239, medicinal: true, industrial: true, adultUse: false, description: "Regulación del cannabis medicinal, pero uso recreativo prohibido." },
+    { country: "Japón", marketValue: 0, medicinal: true, industrial: true, adultUse: false, description: "Regulaciones estrictas y prohibiciones. Permitido solo CBD." },
+    { country: "República Checa", marketValue: 7, medicinal: true, industrial: true, adultUse: false, description: "Mercado de cannabis medicinal establecido." },
+    { country: "Eslovenia", marketValue: 42, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal regulado desde 2013." },
+    { country: "Ecuador", marketValue: 3, medicinal: true, industrial: true, adultUse: false, description: "Regulación en cannabis medicinal en desarrollo." },
+    { country: "Argentina", marketValue: 13, medicinal: true, industrial: true, adultUse: false, description: "Regulación del cannabis medicinal." },
+    { country: "Brasil", marketValue: 10, medicinal: true, industrial: true, adultUse: false, description: "Cannabis medicinal aprobado, pero con restricciones." },
+    { country: "Perú", marketValue: 25, medicinal: true, industrial: true, adultUse: false, description: "Regulación de cannabis medicinal en desarrollo." },
     { country: "Cabo Verde", marketValue: 40, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal en discusión." },
     { country: "Catar", marketValue: 80, medicinal: true, industrial: false, adultUse: false, description: "Mercado en desarrollo para uso medicinal." },
     { country: "Rumanía", marketValue: 120, medicinal: true, industrial: false, adultUse: false, description: "Uso medicinal regulado." },
@@ -260,7 +255,7 @@ const CannabisMarketSimulator = () => {
            matchesMedicinal && 
            matchesIndustrial && 
            matchesAdultUse;
-  });
+  }).sort((a, b) => b.marketValue - a.marketValue);
   
 
   const [showAllMarkets, setShowAllMarkets] = useState(false);
@@ -343,7 +338,7 @@ const CannabisMarketSimulator = () => {
             <Slider
               id="medical-value"
               min={0}
-              max={500}
+              max={15000}
               step={10}
               value={[medicalValue]}
               onValueChange={(value) => setMedicalValue(value[0])}
@@ -354,7 +349,7 @@ const CannabisMarketSimulator = () => {
             <Slider
               id="hemp-value"
               min={0}
-              max={500}
+              max={15000}
               step={10}
               value={[hempValue]}
               onValueChange={(value) => setHempValue(value[0])}
@@ -365,7 +360,7 @@ const CannabisMarketSimulator = () => {
             <Slider
               id="adult-use-value"
               min={0}
-              max={500}
+              max={15000}
               step={10}
               value={[adultUseValue]}
               onValueChange={(value) => setAdultUseValue(value[0])}
@@ -385,7 +380,7 @@ const CannabisMarketSimulator = () => {
               {marketsToDisplay.map((market, index) => (
                 <div key={index} className="border p-4 rounded">
                   <h3 className="font-bold">{market.country}</h3>
-                  <p>Valor de Mercado: US$ {market.marketValue} millones</p>
+                  <p>Valor de Mercado: US$ {market.marketValue.toLocaleString('en-US')} millones</p>
                   <p>{market.description}</p>
                 </div>
               ))}
