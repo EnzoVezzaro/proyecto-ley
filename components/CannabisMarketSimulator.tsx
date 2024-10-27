@@ -337,7 +337,7 @@ const CannabisMarketSimulator = () => {
             <Slider
               id="medical-value"
               min={0}
-              max={15000}
+              max={5000}
               step={10}
               value={[medicalValue]}
               onValueChange={(value) => setMedicalValue(value[0])}
@@ -348,7 +348,7 @@ const CannabisMarketSimulator = () => {
             <Slider
               id="hemp-value"
               min={0}
-              max={15000}
+              max={5000}
               step={10}
               value={[hempValue]}
               onValueChange={(value) => setHempValue(value[0])}
@@ -359,7 +359,7 @@ const CannabisMarketSimulator = () => {
             <Slider
               id="adult-use-value"
               min={0}
-              max={15000}
+              max={5000}
               step={10}
               value={[adultUseValue]}
               onValueChange={(value) => setAdultUseValue(value[0])}
