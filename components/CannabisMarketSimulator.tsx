@@ -197,13 +197,42 @@ const CannabisMarketSimulator = () => {
   };
 
   const taxDistribution = [
-    { name: "Ministerio de Economía, Planificación y Desarrollo", percentage: 5, description: "Para atender el inciso c) del artículo 2" },
-    { name: "Ministerio de Salud: Uso Medicinal", percentage: 10, description: "Para atender los incisos a) y e) del artículo 2" },
-    { name: "Ministerio de Salud: Red integral de Asistencia ", percentage: 5, description: "Para atender el inciso f) del artículo 2" },
-    { name: "Instituto Dominicano del Cannabis (INDOCANNABIS)", percentage: 15, description: "Para atender las funciones atribuidas en el articulo 29" },
-    { name: "Fondo INDOCANNABIS", percentage: 10, description: "Para atender necesidades emergentes como establecido en el articulo 34" },
-    { name: "Otros destinos", percentage: 65, description: "Destino no especificado en el artículo 47" },
-  ];
+    { 
+      name: "Ministerio de Salud Pública", 
+      percentage: 30, 
+      description: "Para atender la finalidad de 'Regular y permitir el acceso y la utilización del cannabis y sus derivados para uso medicinal y terapéutico' (inciso a) del artículo 2), así como la creación y fortalecimiento de la red integral de asistencia para personas con problemas derivados del consumo de cannabis (inciso f) del artículo 2)." 
+    },
+    { 
+      name: "Ministerio de Industria, Comercio y Mipymes", 
+      percentage: 10, 
+      description: "Para atender la finalidad de 'Autorizar la producción, industrialización y comercialización del cáñamo de uso industrial con fines alimentarios, veterinarios y terapéuticos, y sus productos derivados' (inciso b) del artículo 2)." 
+    },
+    { 
+      name: "Ministerio de Agricultura", 
+      percentage: 10, 
+      description: "Para la finalidad de 'Promover el desarrollo económico y social y el adecuado reparto de la riqueza con énfasis en las zonas rurales de nuestro país' (inciso c) del artículo 2), en particular mediante el fomento de encadenamientos productivos que beneficien a los pequeños productores agropecuarios." 
+    },
+    { 
+      name: "Ministerio de Interior y Policía, DNCD, y Ministerio Público", 
+      percentage: 15, 
+      description: "Para atender la finalidad de 'Proteger a los habitantes del país de los riesgos que implica el vínculo con el comercio ilegal y el narcotráfico' (inciso d) del artículo 2), así como para reducir la incidencia del narcotráfico, el crimen organizado, la estigmatización y criminalización del consumidor." 
+    },
+    { 
+      name: "Consejo Nacional de Drogas", 
+      percentage: 5, 
+      description: "Para la finalidad de 'Proteger, promover y mejorar la salud pública de la población mediante una política orientada a minimizar los riesgos y reducir los daños por el uso del cannabis psicoactivo' (inciso e) del artículo 2), especialmente para promover la debida información, educación y prevención sobre los posibles efectos perjudiciales del consumo problemático." 
+    },
+    { 
+      name: "Instituto Dominicano del Cannabis (INDOCANNABIS)", 
+      percentage: 20, 
+      description: "Para fortalecer las capacidades del INDOCANNABIS en su rol de regulación y supervisión de las actividades relacionadas con el cannabis, conforme al ARTÍCULO 28 de esta ley." 
+    },
+    { 
+      name: "Fondo para necesidades emergentes en la regulación del cannabis", 
+      percentage: 10, 
+      description: "Este fondo será administrado por el INDOCANNABIS para enfrentar eventualidades regulatorias, formativas o de salud pública, como se establece en el ARTÍCULO 34." 
+    }
+  ];  
 
   const distributionTable = [
     { institution: "Ministerio Público", percentage: 25, amount: 97789016.96 },
@@ -699,7 +728,7 @@ const CannabisMarketSimulator = () => {
                   <TableCell>{tax.name}</TableCell>
                   <TableCell>{tax.percentage}%</TableCell>
                   <TableCell>{((calculateTotalTaxRevenue() as any * tax.percentage) / 100).toFixed(2)}</TableCell>
-                  <TableCell>{tax.description}</TableCell>
+                  <TableCell width={'35%'}>{tax.description}</TableCell>
                 </TableRow>
               ))}
               <TableRow className="font-bold">
